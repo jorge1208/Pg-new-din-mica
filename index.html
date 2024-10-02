@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+    <link rel="stylesheet" href="boton.css">
+</head>
+<body>
+    <form id = "Formulario" action="procesar.php" method="post">
+        <p>Nombre y Apellidos: <input type="text" name="nombre"></p>
+        <p>Fecha de Nacimiento: <input type="date" name="fecha"></p>
+        <p>Ocupación: <input type="text" name="ocupacion"></p>
+        <p>Contacto:</p>
+        <p>(teléfono): <input type="text" name="telefono"></p>
+        <p>(email): <input type="text" name="email"></p>
+        <p>Nacionalidad:
+            <select name="nacionalidad">
+                <option value="Perú">Perú</option>
+                <option value="Alemania">Alemania</option>
+                <option value="Chile">Chile</option>
+                <option value="Estados Unidos">Estados Unidos</option>
+            </select>
+        </p>
+        <p>Nivel de inglés:
+            <br/><input type="radio" id="basico" name="ingles" value="Básico">
+            <label for="Básico">Básico</label>
+            <input type="radio" id="Intermedio" name="ingles" value="Intermedio">
+            <label for="Intermedio">Intermedio</label>
+            <input type="radio" id="Avanzado" name="ingles" value="Avanzado">
+            <label for="Avanzado">Avanzado</label>
+            <input type="radio" id="Fluido" name="ingles" value="Fluido">
+            <label for="Fluido">Fluido</label>
+        </p>
+        <p>Lenguajes de programación:
+            <br/><select name="lenguajes[]" multiple>
+                <option value="C++">C++</option>
+                <option value="JavaScript">JavaScript</option>
+                <option value="Java">Java</option>
+                <option value="Python">Python</option>
+                <option value="PHP">PHP</option>
+                <option value="Swift">Swift</option>
+            </select>
+        </p>
+        <p>Perfil:</p>
+        <p><textarea name="perfil"></textarea></p>
+        
+        <div id="experienciaLaboral">
+            <p>Experiencia Laboral: <input type="text" name="experiencia[]"><span class="error"></span></p>
+        </div>
+        <button type="button" onclick="agregarCampo('experienciaLaboral', 'experiencia')">Agregar Experiencia Laboral</button>
+        
+        <div id="formacion">
+            <p>Formación: <input type="text" name="formacion[]"><span class="error"></span></p>
+        </div>
+        <button type="button" onclick="agregarCampo('formacion', 'formacion')">Agregar Formación</button>
+        
+        <div id="habilidades">
+            <p>Habilidades: <input type="text" name="habilidades[]"><span class="error"></span></p>
+        </div>
+        <button type="button" onclick="agregarCampo('habilidades', 'habilidades')">Agregar más habilidades</button>
+        
+        <div id="idiomas">
+            <p>Idiomas: <input type="text" name="idiomas[]"><span class="error"></span></p>
+        </div>
+        <button type="button" onclick="agregarCampo('idiomas', 'idiomas')">Agregar más idiomas</button>
+        
+        <div id="aptitudes">
+            <p>Aptitudes: <input type="text" name="aptitudes[]"><span class="error"></span></p>
+        </div>
+        <button type="button" onclick="agregarCampo('aptitudes', 'aptitudes')">Agregar más aptitudes</button>
+        
+        <p class="center-content"><input type="submit" value="Enviar" class="btn btn-green"></p>
+    </form>
+
+    <script>
+        document.getElementById("Formulario").addEventListener("submit", function(event) {
+            var entrada = this.querySelectorAll("input, select, textarea");
+            var verificar = true;
+            
+            entrada.forEach(function(input) {
+                if (!input.value && input.type !== "submit") {
+                    verificar = false;
+                }
+            });
+
+            if (!verificar) {
+                event.preventDefault(); 
+                alert("Dejo espacios sin llenar en el formulario. Por favor llenelos");
+            }
+        });
+
+        function agregarCampo(contenedorId, nombreCampo) {
+            var contenedor = document.getElementById(contenedorId);
+            var nuevoCampo = document.createElement("p");
+            nuevoCampo.innerHTML = nombreCampo + ': <input type="text" name="' + nombreCampo + '[]"><span class="error"></span>';
+            contenedor.appendChild(nuevoCampo);
+        }
+    </script>
+</body>
+</html>
